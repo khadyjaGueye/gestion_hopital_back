@@ -15,11 +15,13 @@ class PatientResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "id"=>$this->id,
             "nom" => $this->nom,
             "prenom"=> $this->prenom,
             "adresse" => $this->adresse,
             "telephone"=> $this->telephone,
-            "sexe" => $this->age,
+            "sexe" => $this->sexe,
+            "age"=>$this->age,
             "dossier_medical" => new DossierMedicalResource($this->dossier_medical),
 
         ];

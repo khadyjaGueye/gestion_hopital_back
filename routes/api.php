@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminContrller;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MedecinController;
 use App\Http\Controllers\PropertController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -25,17 +26,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //Route pour le medecin
-    Route::get('/medecin/liste/patients', [UserController::class, 'listePatient']);
-    Route::get('/medecin/nombre/patient', [UserController::class, 'nbrePatientParJour']);
-    Route::post('medecin/create/dossier', [UserController::class, 'createDossierMedical']);
+    Route::get('/medecin/liste/patients', [MedecinController::class, 'listePatient']);
+    Route::get('/medecin/nombre/patient', [MedecinController::class, 'nbrePatientParJour']);
+    Route::post('/medecin/create/dossier', [MedecinController::class, 'createDossierMedical']);
+    Route::put('/medecin/update/dossier/{id}',[MedecinController::class,'update']);
+    Route::delete('/medecin/delete/dossier/{id}',[MedecinController::class,'destroy']);
+    Route::get('/medecin/show/dossier/{id}', [MedecinController::class, 'show']);
 
     //Routes pour l'administrateur
     Route::get('/admin/liste/users', [AdminController::class, 'index']);
-    Route::post('/http://localhost:8000/api/admin/liste/userscreate/user', [AdminController::class, 'store']);
-    Route::get('/user/{id}', [AdminController::class, 'show']);
-    Route::put('/update/user/{id}', [AdminController::class, 'update']);
-    Route::delete('/delete/user/{id}', [AdminController::class, 'destroy']);
-    Route::post('/create/service', [AdminController::class, 'createService']);
+    Route::post('/admin/create/user', [AdminController::class, 'store']);
+    Route::get('/admin/user/{id}', [AdminController::class, 'show']);
+    Route::put('/admin/update/user/{id}', [AdminController::class, 'update']);
+    Route::delete('/admin/delete/user/{id}', [AdminController::class, 'destroy']);
+    Route::post('/admin/create/service', [AdminController::class, 'createService']);
 });
 
 

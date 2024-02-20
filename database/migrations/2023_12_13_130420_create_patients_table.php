@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('telephone')->unique();
             $table->string('sexe');
             $table->integer('age');
-            $table->foreignId("dossier_medical_id")->constrained("dossier_medicals");
+            //$table->foreignId("dossier_medical_id")->constrained("dossier_medicals");
             $table->softDeletes();
             $table->timestamps();
         });
